@@ -29,14 +29,11 @@ public class Dinosaur {
     public int getY() {
         return y;    
     }
-    public void updateDelta(float delta) {
-    	this.delta = delta;
-    }
     public void jump() {
     	this.jumping = true;
     	this.v_y = INITIAL_SPEED;
     }
-    public void jumpMovement() {
+    public void update(float delta) {
     	if(this.jumping) {
     		// This is bad.
     		GameScreen.dinosaurSprite = new Texture("p1_jump.png");

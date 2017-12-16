@@ -7,15 +7,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen extends ScreenAdapter {
-	private DinoJumpGame dinoJumpGame;
-	private Dinosaur dinosaur;
+	DinoJumpGame dinoJumpGame;
+	Dinosaur dinosaur;
+	World world;
 	static Texture dinosaurSprite;
 	
 	public GameScreen(DinoJumpGame dinoJumpGame) {
 		this.dinoJumpGame = dinoJumpGame;
-		this.dinosaur = new Dinosaur(Dinosaur.DEFAULT_X, 50);
+		this.world = new World(dinoJumpGame);
 		dinosaurSprite = new Texture("p1_stand.png");
-		dinosaur.jump();
+		world.dinosaur.jump();
 	}
 
     @Override
@@ -29,12 +30,10 @@ public class GameScreen extends ScreenAdapter {
         // Draws dinosaur
 
         // Triggers jumping movements
-        this.dinosaur.jumpMovement();
+        world.update(delta);
         // Gets the position after movement calculation
-        int x = this.dinosaur.getX();
-        int y = this.dinosaur.getY();
-        // Sets the delta time passed
-        this.dinosaur.updateDelta(delta);
+        int x = world.dinosaur.getX();
+        int y = world.dinosaur.getY();
         
         batch.draw(dinosaurSprite, x, y);
         batch.end();
