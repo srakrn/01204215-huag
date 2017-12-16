@@ -21,6 +21,7 @@ public class Buttons {
 	public void update(float delta) {
 		if(dinosaurKeypress() == "JUMP") {
 			this.world.dinosaur.jump();
+			Cactus.spawn();
 		}
 	}
 }

@@ -3,10 +3,12 @@ package com.srakrn.dinojump;
 import java.util.ArrayList;
 
 public class Cactus {
-	public static ArrayList<Float> cactiTime = new ArrayList<Float>();
+	public static ArrayList<Float> cactiTime = new ArrayList<Float>() {{
+		add((float) 3); 
+	}};
 	public static ArrayList<Float> cactiDelta = new ArrayList<Float>();
 	public static ArrayList<Integer> cactiPosition = new ArrayList<Integer>();
-	public final int SPEED = 30;
+	public final static int SPEED = 400;
 	public static float time = 0;
 	
 	public static void spawn() {
@@ -17,8 +19,7 @@ public class Cactus {
 	}
 	public static void update(float delta) {
 		time += delta;
-		cactiTime.add((float) 0);
-		while(cactiTime.size() < 5) {
+		while(cactiTime.size() < 20) {
 			Cactus.spawn();
 		}
 		cactiDelta.clear();
@@ -27,14 +28,13 @@ public class Cactus {
 		}
 		cactiPosition.clear();
 		for(int i=0; i<cactiTime.size(); i++) {
-			cactiPosition.add(Math.round((cactiTime.get(i)-Cactus.time)*300)+50);
+			cactiPosition.add(Math.round((cactiTime.get(i)-Cactus.time)*SPEED)+50);
 		}
 		for(int i=0; i<cactiTime.size(); i++) {
 			if(cactiDelta.get(i) < -1) {
 				cactiTime.remove(i);
 				cactiDelta.remove(i);
 				cactiPosition.remove(i);
-				Cactus.spawn();
 			}
 		}
 	}
