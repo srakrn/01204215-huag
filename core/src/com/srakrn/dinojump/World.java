@@ -14,5 +14,6 @@ public class World {
 	public void update(float delta) {
 		dinosaur.update(delta);
 		Cactus.update(delta);
+		Bird.update(delta);
 	}
 }

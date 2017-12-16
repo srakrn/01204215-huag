@@ -13,18 +13,18 @@ public class Cactus {
 	}};
 	private static ArrayList<Float> cactiDelta = new ArrayList<Float>();
 	private static ArrayList<Integer> cactiPosition = new ArrayList<Integer>();
-	public final static int SPEED = 400;
+	public static float speed = 400;
 	public static float time = 0;
 	
 	public static void spawn() {
-		cactiTime.add((float) (Math.random()*2+0.7 + cactiTime.get(cactiTime.size()-1)));
+		cactiTime.add((float) (Math.random()*(2)+(500/speed) + cactiTime.get(cactiTime.size()-1)));
 	}
 	public static void spawnWithCustomTime(float time) {
 		cactiTime.add(time);
 	}
 	public static void update(float delta) {
 		time += delta;
-		while(cactiTime.size() < 20) {
+		while(cactiTime.size() < 5) {
 			Cactus.spawn();
 		}
 		cactiDelta.clear();
@@ -33,7 +33,7 @@ public class Cactus {
 		}
 		cactiPosition.clear();
 		for(int i=0; i<cactiTime.size(); i++) {
-			cactiPosition.add(Math.round((cactiTime.get(i)-Cactus.time)*SPEED)+50);
+			cactiPosition.add(Math.round((cactiTime.get(i)-Cactus.time)*speed)+50);
 		}
 		for(int i=0; i<cactiTime.size(); i++) {
 			if(cactiDelta.get(i) < -1) {
@@ -42,6 +42,7 @@ public class Cactus {
 				cactiPosition.remove(i);
 			}
 		}
+		speed += 0.2;
 	}
 	public static ArrayList<Float> getCactiTime() {
 		return cactiTime;

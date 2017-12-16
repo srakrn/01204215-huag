@@ -15,6 +15,8 @@ public class WorldRenderer {
 	Texture dinosaurSprite;
 	Cactus cactus;
 	Texture cactusSprite;
+	Bird bird;
+	Texture birdSprite;
 
 	WorldRenderer(DinoJumpGame dinoJumpGame, World world){
 		this.dinoJumpGame = dinoJumpGame;
@@ -22,6 +24,7 @@ public class WorldRenderer {
 		this.dinosaur = world.dinosaur;
 		this.dinosaurSprite = new Texture("p1_stand.png");
 		this.cactusSprite = new Texture("cactus.png");
+		this.birdSprite = new Texture("bat.png");
 	}
 	
 	public void updateDinosaurSprite(Dinosaur dinosaur) {
@@ -58,6 +61,11 @@ public class WorldRenderer {
 				batch.draw(cactusSprite, cactiPosition.get(i), World.DEFAULT_Y);
 			}
 
+			// Birds
+			ArrayList<Integer> birdsPosition = Bird.getBirdsPosition();
+			for(int i=0; i<birdsPosition.size(); i++) {
+				batch.draw(birdSprite, birdsPosition.get(i), World.DEFAULT_Y+80);
+			}
 			batch.end();
 		}
 	}

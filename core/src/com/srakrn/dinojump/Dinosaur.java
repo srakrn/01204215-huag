@@ -8,7 +8,8 @@ public class Dinosaur {
 	public static float INITIAL_SPEED = 900;
 	public static int DEFAULT_X = 100;
 
-	private boolean jumping = false;
+	private boolean jumping;
+	private boolean ducking;
 	
 	private float time_counter = 0;
 	
@@ -20,6 +21,8 @@ public class Dinosaur {
         this.y = y;
         this.init_y = y;
         this.alive = true;
+        this.jumping = false;
+        this.ducking = false;
     }    
  
     public int getX() {
@@ -35,32 +38,44 @@ public class Dinosaur {
     	this.jumping = true;
     }
     public boolean isDucking() {
-    	return false;
+    	return this.ducking;
+    }
+    public void duck() {
+    	this.ducking = true;
+    }
+    public void unDuck() {
+    	this.ducking = false;
     }
     public boolean isAlive() {
     	return this.alive;
     }
 
     public void update(float delta) {
-		for(int i=0; i < Cactus.getCactiPosition().size(); i++) {
-			if(Math.abs(Dinosaur.DEFAULT_X - Cactus.getCactiPosition().get(i)) < 30 && !this.isJumping()) {
-				System.out.println("died!");
-				this.alive = false;
+    	if(this.alive) {
+			for(int i=0; i < Bird.getBirdsPosition().size()/3; i++) {
+				if(Math.abs(Dinosaur.DEFAULT_X - Bird.getBirdsPosition().get(i)) < 30 && !this.isDucking()) {
+					System.out.println("died!");
+					this.alive = false;
+				}
 			}
-		}
-
-    	if(this.jumping) {
-			if(time_counter <= .6) {
-				this.y = init_y + (int) ((INITIAL_SPEED*time_counter)+0.5*GRAVITY*Math.pow(time_counter, 2));
+			for(int i=0; i < Cactus.getCactiPosition().size()/3; i++) {
+				if(Math.abs(Dinosaur.DEFAULT_X - Cactus.getCactiPosition().get(i)) < 30 && !this.isJumping()) {
+					System.out.println("died!");
+					this.alive = false;
+				}
 			}
-			else {
-				time_counter = 0;
-				this.jumping = false;
-				this.y = this.init_y;
+			
+			if(this.jumping) {
+				if(time_counter <= .6) {
+					this.y = init_y + (int) ((INITIAL_SPEED*time_counter)+0.5*GRAVITY*Math.pow(time_counter, 2));
+				}
+				else {
+					time_counter = 0;
+					this.jumping = false;
+					this.y = this.init_y;
+				}
+				time_counter += delta;
 			}
-			time_counter += delta;
-    	}
-    	else {
     	}
     }
 }
