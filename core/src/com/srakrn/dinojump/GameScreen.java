@@ -7,17 +7,20 @@ public class GameScreen extends ScreenAdapter {
 	Dinosaur dinosaur;
 	World world;
 	WorldRenderer worldRenderer;
+	Buttons buttons;
 	
 	public GameScreen(DinoJumpGame dinoJumpGame) {
 		this.dinoJumpGame = dinoJumpGame;
 		this.world = new World(dinoJumpGame);
 		this.worldRenderer = new WorldRenderer(dinoJumpGame, world);
-		World.dinosaur.jump();
+		this.buttons = new Buttons(dinoJumpGame, world);
+		world.dinosaur.jump();
 	}
 
     @Override
     public void render(float delta) {
-    	World.update(delta);
-    	WorldRenderer.render();
+    	world.update(delta);
+    	worldRenderer.render();
+    	buttons.update(delta);
     }
 }

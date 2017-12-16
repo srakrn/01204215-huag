@@ -1,17 +1,14 @@
 package com.srakrn.dinojump;
 
-import com.badlogic.gdx.graphics.Texture;
 
 public class Dinosaur {
 	private int x, y, init_y;
-	private float v_y;
-	public static float GRAVITY = -2000;
-	public static float INITIAL_SPEED = 600;
+	public static float GRAVITY = -3000;
+	public static float INITIAL_SPEED = 900;
 	public static int DEFAULT_X = 100;
 
 	private boolean jumping = false;
 	
-	private float delta = 0;
 	private float time_counter = 0;
 	
 	// Instead of using `Vector2`, we decided to
@@ -29,15 +26,16 @@ public class Dinosaur {
     public int getY() {
         return y;    
     }
+    public boolean isJumping() {
+    	return jumping;
+    }
     public void jump() {
     	this.jumping = true;
-    	this.v_y = INITIAL_SPEED;
     }
     public void update(float delta) {
     	if(this.jumping) {
 			if(time_counter <= .6) {
 				this.y = init_y + (int) ((INITIAL_SPEED*time_counter)+0.5*GRAVITY*Math.pow(time_counter, 2));
-				this.v_y = INITIAL_SPEED + GRAVITY*time_counter;
 			}
 			else {
 				time_counter = 0;

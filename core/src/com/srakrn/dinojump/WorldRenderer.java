@@ -5,20 +5,21 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+// SOMETHING'S VERY WRONG ON STATIC/NON-STATIC HERE.
 public class WorldRenderer {
-	static DinoJumpGame dinoJumpGame;
-	static World world;
-	static Dinosaur dinosaur;
-	static Texture dinosaurSprite;
+	DinoJumpGame dinoJumpGame;
+	World world;
+	Dinosaur dinosaur;
+	Texture dinosaurSprite;
 
 	WorldRenderer(DinoJumpGame dinoJumpGame, World world){
-		WorldRenderer.dinoJumpGame = dinoJumpGame;
-		WorldRenderer.world = world;
-		WorldRenderer.dinosaur = world.dinosaur;
-		WorldRenderer.dinosaurSprite = new Texture("p1_stand.png");
+		this.dinoJumpGame = dinoJumpGame;
+		this.world = world;
+		this.dinosaur = world.dinosaur;
+		this.dinosaurSprite = new Texture("p1_stand.png");
 	}
 	
-	public static void render() {
+	public void render() {
         SpriteBatch batch = DinoJumpGame.batch;
         batch.begin();
         // Clears screen
@@ -29,7 +30,7 @@ public class WorldRenderer {
         int x = world.dinosaur.getX();
         int y = world.dinosaur.getY();
         
-        batch.draw(WorldRenderer.dinosaurSprite, x, y);
+        batch.draw(this.dinosaurSprite, x, y);
         batch.end();
 	}
 }
