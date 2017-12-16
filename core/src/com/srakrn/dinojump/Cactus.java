@@ -3,7 +3,12 @@ package com.srakrn.dinojump;
 import java.util.ArrayList;
 
 public class Cactus {
-	public static ArrayList<Float> cactiTime = new ArrayList<Float>() {{
+	public static ArrayList<Float> cactiTime = new ArrayList<Float>() {/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+	{
 		add((float) 3); 
 	}};
 	public static ArrayList<Float> cactiDelta = new ArrayList<Float>();
