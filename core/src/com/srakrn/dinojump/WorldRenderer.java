@@ -1,5 +1,7 @@
 package com.srakrn.dinojump;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,12 +13,15 @@ public class WorldRenderer {
 	World world;
 	Dinosaur dinosaur;
 	Texture dinosaurSprite;
+	Cactus cactus;
+	Texture cactusSprite;
 
 	WorldRenderer(DinoJumpGame dinoJumpGame, World world){
 		this.dinoJumpGame = dinoJumpGame;
 		this.world = world;
 		this.dinosaur = world.dinosaur;
 		this.dinosaurSprite = new Texture("p1_stand.png");
+		this.cactusSprite = new Texture("cactus.png");
 	}
 	
 	public void updateDinosaurSprite(Dinosaur dinosaur) {
@@ -24,7 +29,7 @@ public class WorldRenderer {
 			this.dinosaurSprite = new Texture("p1_jump.png");
 		}
 		else if(dinosaur.isDucking()) {
-			this.dinosaurSprite = new Texture("p1_stand.png");
+			this.dinosaurSprite = new Texture("p1_duck.png");
 		}
 		else {
 			this.dinosaurSprite = new Texture("p1_stand.png");
@@ -43,8 +48,14 @@ public class WorldRenderer {
         int y = world.dinosaur.getY();
         // Updates dinosaur sprite
         updateDinosaurSprite(world.dinosaur);
-        
+        // and draw
         batch.draw(this.dinosaurSprite, x, y);
+        
+        // Cactus
+        ArrayList<Float> cactiTime = Cactus.getCactiTime();
+		for(int i=0; i<cactiTime.size(); i++) {
+			batch.draw(cactusSprite, Math.round(cactiTime.get(i))*100, World.DEFAULT_Y);
+		}
         batch.end();
 	}
 }
