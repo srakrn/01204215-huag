@@ -1,7 +1,7 @@
 package com.srakrn.dinojump;
 
 public class World {
-	public static final int DEFAULT_Y = 50;
+	public static final int DEFAULT_Y = 69;
 	public static boolean dead = false;
 	Dinosaur dinosaur;
 	// private DinoJumpGame dinoJumpGame;
@@ -12,8 +12,10 @@ public class World {
 	}
 	
 	public void update(float delta) {
-		dinosaur.update(delta);
-		Cactus.update(delta);
-		Bird.update(delta);
+		if(dinosaur.isAlive()) {
+			dinosaur.update(delta);
+			Cactus.update(delta);
+			Bird.update(delta);
+		}
 	}
 }

@@ -17,6 +17,8 @@ public class WorldRenderer {
 	Texture cactusSprite;
 	Bird bird;
 	Texture birdSprite;
+	Texture floorTileTexture;
+	Texture gameOverOverlay;
 
 	WorldRenderer(DinoJumpGame dinoJumpGame, World world){
 		this.dinoJumpGame = dinoJumpGame;
@@ -25,6 +27,8 @@ public class WorldRenderer {
 		this.dinosaurSprite = new Texture("p1_stand.png");
 		this.cactusSprite = new Texture("cactus.png");
 		this.birdSprite = new Texture("bat.png");
+		this.floorTileTexture = new Texture("floor_tile.png");
+		this.gameOverOverlay = new Texture("gameover.png");
 	}
 	
 	public void updateDinosaurSprite(Dinosaur dinosaur) {
@@ -34,39 +38,46 @@ public class WorldRenderer {
 		else if(dinosaur.isDucking()) {
 			this.dinosaurSprite = new Texture("p1_duck.png");
 		}
+		else if(!dinosaur.isAlive()) {
+			this.dinosaurSprite = new Texture("p1_hurt.png");
+		}
 		else {
 			this.dinosaurSprite = new Texture("p1_stand.png");
 		}
 	}
 	
 	public void render() {
-		if(dinosaur.isAlive()) {
-			SpriteBatch batch = DinoJumpGame.batch;
-			batch.begin();
-			// Clears screen
-			Gdx.gl.glClearColor(0, 0, 0, 1);
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-			
-			// Gets the position after movement calculation
-			int x = world.dinosaur.getX();
-			int y = world.dinosaur.getY();
-			// Updates dinosaur sprite
-			updateDinosaurSprite(world.dinosaur);
-			// and draw
-			batch.draw(this.dinosaurSprite, x, y);
-			
-			// Cactus
-			ArrayList<Integer> cactiPosition = Cactus.getCactiPosition();
-			for(int i=0; i<cactiPosition.size(); i++) {
-				batch.draw(cactusSprite, cactiPosition.get(i), World.DEFAULT_Y);
-			}
-
-			// Birds
-			ArrayList<Integer> birdsPosition = Bird.getBirdsPosition();
-			for(int i=0; i<birdsPosition.size(); i++) {
-				batch.draw(birdSprite, birdsPosition.get(i), World.DEFAULT_Y+80);
-			}
-			batch.end();
+		SpriteBatch batch = DinoJumpGame.batch;
+		batch.begin();
+		// Clears screen
+		Gdx.gl.glClearColor((float)0.875,(float) 0.9648,(float) 0.9804,(float) 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		// Draws background
+		batch.draw(floorTileTexture, 0, 0);
+		
+		// Gets the position after movement calculation
+		int x = world.dinosaur.getX();
+		int y = world.dinosaur.getY();
+		// Updates dinosaur sprite
+		updateDinosaurSprite(world.dinosaur);
+		// and draw
+		batch.draw(this.dinosaurSprite, x, y);
+		
+		// Cactus
+		ArrayList<Integer> cactiPosition = Cactus.getCactiPosition();
+		for(int i=0; i<cactiPosition.size(); i++) {
+			batch.draw(cactusSprite, cactiPosition.get(i), World.DEFAULT_Y);
 		}
+
+		// Birds
+		ArrayList<Integer> birdsPosition = Bird.getBirdsPosition();
+		for(int i=0; i<birdsPosition.size(); i++) {
+			batch.draw(birdSprite, birdsPosition.get(i), World.DEFAULT_Y+80);
+		}
+		if(!dinosaur.isAlive()) {
+			batch.draw(gameOverOverlay, 0, 0);
+		}
+		batch.end();
 	}
 }

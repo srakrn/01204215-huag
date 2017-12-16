@@ -4,8 +4,8 @@ package com.srakrn.dinojump;
 public class Dinosaur {
 	private int x, y, init_y;
 	private boolean alive;
-	public static float GRAVITY = -3000;
-	public static float INITIAL_SPEED = 900;
+	public static float GRAVITY = -2000;
+	public static float INITIAL_SPEED = 600;
 	public static int DEFAULT_X = 100;
 
 	private boolean jumping;
