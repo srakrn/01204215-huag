@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Cactus {
 	public static ArrayList<Float> cacti = new ArrayList<Float>();
 	public final int SPEED = 30;
-	private static float time = 0;
+	public static float time = 0;
 	
 	public static void spawn() {
-		cacti.add((float) (Math.random()*1.5+0.5 + cacti.get(cacti.size()-1)));
+		cacti.add((float) (Math.random()*2+0.7 + cacti.get(cacti.size()-1)));
 	}
 	public static void spawnWithCustomTime(float time) {
 		cacti.add(time);

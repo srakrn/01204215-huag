@@ -54,7 +54,7 @@ public class WorldRenderer {
         // Cactus
         ArrayList<Float> cactiTime = Cactus.getCactiTime();
 		for(int i=0; i<cactiTime.size(); i++) {
-			batch.draw(cactusSprite, Math.round(cactiTime.get(i))*100, World.DEFAULT_Y);
+			batch.draw(cactusSprite, Math.round((cactiTime.get(i)-Cactus.time)*300)+50, World.DEFAULT_Y);
 		}
         batch.end();
 	}
