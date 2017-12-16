@@ -3,30 +3,45 @@ package com.srakrn.dinojump;
 import java.util.ArrayList;
 
 public class Cactus {
-	public static ArrayList<Float> cacti = new ArrayList<Float>();
+	public static ArrayList<Float> cactiTime = new ArrayList<Float>();
+	public static ArrayList<Float> cactiDelta = new ArrayList<Float>();
+	public static ArrayList<Integer> cactiPosition = new ArrayList<Integer>();
 	public final int SPEED = 30;
 	public static float time = 0;
 	
 	public static void spawn() {
-		cacti.add((float) (Math.random()*2+0.7 + cacti.get(cacti.size()-1)));
+		cactiTime.add((float) (Math.random()*2+0.7 + cactiTime.get(cactiTime.size()-1)));
 	}
 	public static void spawnWithCustomTime(float time) {
-		cacti.add(time);
+		cactiTime.add(time);
 	}
 	public static void update(float delta) {
 		time += delta;
-		cacti.add((float) 0);
-		while(cacti.size() < 20) {
+		cactiTime.add((float) 0);
+		while(cactiTime.size() < 5) {
 			Cactus.spawn();
 		}
-		for(int i=0; i<cacti.size(); i++) {
-			if(cacti.get(i) < time) {
-				cacti.remove(i);
+		cactiDelta.clear();
+		for(int i=0; i<cactiTime.size(); i++) {
+			cactiDelta.add(cactiTime.get(i)-Cactus.time);
+		}
+		cactiPosition.clear();
+		for(int i=0; i<cactiTime.size(); i++) {
+			cactiPosition.add(Math.round((cactiTime.get(i)-Cactus.time)*300)+50);
+		}
+		for(int i=0; i<cactiTime.size(); i++) {
+			if(cactiDelta.get(i) < -1) {
+				cactiTime.remove(i);
+				cactiDelta.remove(i);
+				cactiPosition.remove(i);
 				Cactus.spawn();
 			}
 		}
 	}
-	public static ArrayList<Float> getCactiTime(){
-		return cacti;
+	public static ArrayList<Float> getCactiTime() {
+		return cactiTime;
+	}
+	public static ArrayList<Integer> getCactiPosition() {
+		return cactiPosition;
 	}
 }

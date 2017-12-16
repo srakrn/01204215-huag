@@ -52,10 +52,11 @@ public class WorldRenderer {
         batch.draw(this.dinosaurSprite, x, y);
         
         // Cactus
-        ArrayList<Float> cactiTime = Cactus.getCactiTime();
-		for(int i=0; i<cactiTime.size(); i++) {
-			batch.draw(cactusSprite, Math.round((cactiTime.get(i)-Cactus.time)*300)+50, World.DEFAULT_Y);
+        ArrayList<Integer> cactiPosition = Cactus.getCactiPosition();
+		for(int i=0; i<cactiPosition.size(); i++) {
+			batch.draw(cactusSprite, cactiPosition.get(i), World.DEFAULT_Y);
 		}
+
         batch.end();
 	}
 }
