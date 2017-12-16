@@ -2,6 +2,7 @@ package com.srakrn.dinojump;
 
 public class World {
 	public static final int DEFAULT_Y = 50;
+	public static boolean dead = false;
 	Dinosaur dinosaur;
 	// private DinoJumpGame dinoJumpGame;
 	

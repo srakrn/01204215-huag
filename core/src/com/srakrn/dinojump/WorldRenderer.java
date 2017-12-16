@@ -37,26 +37,28 @@ public class WorldRenderer {
 	}
 	
 	public void render() {
-        SpriteBatch batch = DinoJumpGame.batch;
-        batch.begin();
-        // Clears screen
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
-        // Gets the position after movement calculation
-        int x = world.dinosaur.getX();
-        int y = world.dinosaur.getY();
-        // Updates dinosaur sprite
-        updateDinosaurSprite(world.dinosaur);
-        // and draw
-        batch.draw(this.dinosaurSprite, x, y);
-        
-        // Cactus
-        ArrayList<Integer> cactiPosition = Cactus.getCactiPosition();
-		for(int i=0; i<cactiPosition.size(); i++) {
-			batch.draw(cactusSprite, cactiPosition.get(i), World.DEFAULT_Y);
-		}
+		if(dinosaur.isAlive()) {
+			SpriteBatch batch = DinoJumpGame.batch;
+			batch.begin();
+			// Clears screen
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			
+			// Gets the position after movement calculation
+			int x = world.dinosaur.getX();
+			int y = world.dinosaur.getY();
+			// Updates dinosaur sprite
+			updateDinosaurSprite(world.dinosaur);
+			// and draw
+			batch.draw(this.dinosaurSprite, x, y);
+			
+			// Cactus
+			ArrayList<Integer> cactiPosition = Cactus.getCactiPosition();
+			for(int i=0; i<cactiPosition.size(); i++) {
+				batch.draw(cactusSprite, cactiPosition.get(i), World.DEFAULT_Y);
+			}
 
-        batch.end();
+			batch.end();
+		}
 	}
 }
