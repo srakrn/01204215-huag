@@ -1,7 +1,7 @@
 package com.srakrn.dinojump;
 
 public class World {
-	Dinosaur dinosaur;
+	static Dinosaur dinosaur;
 	private DinoJumpGame dinoJumpGame;
 	
 	World(DinoJumpGame dinoJumpGame) {
@@ -9,7 +9,7 @@ public class World {
 		dinosaur = new Dinosaur(Dinosaur.DEFAULT_X, 50);
 	}
 	
-	public void update(float delta) {
+	public static void update(float delta) {
 		dinosaur.update(delta);
 	}
 }

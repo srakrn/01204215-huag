@@ -35,8 +35,6 @@ public class Dinosaur {
     }
     public void update(float delta) {
     	if(this.jumping) {
-    		// This is bad.
-    		GameScreen.dinosaurSprite = new Texture("p1_jump.png");
 			if(time_counter <= .6) {
 				this.y = init_y + (int) ((INITIAL_SPEED*time_counter)+0.5*GRAVITY*Math.pow(time_counter, 2));
 				this.v_y = INITIAL_SPEED + GRAVITY*time_counter;
@@ -49,7 +47,6 @@ public class Dinosaur {
 			time_counter += delta;
     	}
     	else {
-    		GameScreen.dinosaurSprite = new Texture("p1_stand.png");
     	}
     }
 }
