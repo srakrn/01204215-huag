@@ -14,7 +14,6 @@ public class GameScreen extends ScreenAdapter {
 		this.world = new World(dinoJumpGame);
 		this.worldRenderer = new WorldRenderer(dinoJumpGame, world);
 		this.buttons = new Buttons(dinoJumpGame, world);
-		world.dinosaur.jump();
 	}
 
     @Override

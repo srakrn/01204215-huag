@@ -19,6 +19,18 @@ public class WorldRenderer {
 		this.dinosaurSprite = new Texture("p1_stand.png");
 	}
 	
+	public void updateDinosaurSprite(Dinosaur dinosaur) {
+		if(dinosaur.isJumping()) {
+			this.dinosaurSprite = new Texture("p1_jump.png");
+		}
+		else if(dinosaur.isDucking()) {
+			this.dinosaurSprite = new Texture("p1_stand.png");
+		}
+		else {
+			this.dinosaurSprite = new Texture("p1_stand.png");
+		}
+	}
+	
 	public void render() {
         SpriteBatch batch = DinoJumpGame.batch;
         batch.begin();
@@ -29,6 +41,8 @@ public class WorldRenderer {
         // Gets the position after movement calculation
         int x = world.dinosaur.getX();
         int y = world.dinosaur.getY();
+        // Updates dinosaur sprite
+        updateDinosaurSprite(world.dinosaur);
         
         batch.draw(this.dinosaurSprite, x, y);
         batch.end();

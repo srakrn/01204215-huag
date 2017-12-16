@@ -32,6 +32,9 @@ public class Dinosaur {
     public void jump() {
     	this.jumping = true;
     }
+    public boolean isDucking() {
+    	return false;
+    }
     public void update(float delta) {
     	if(this.jumping) {
 			if(time_counter <= .6) {
