@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 public class Dinosaur {
 	private int x, y, init_y;
 	private float v_y;
-	public static float GRAVITY = 0.5f;
+	public static float GRAVITY = -2000;
+	public static float INITIAL_SPEED = 600;
 	public static int DEFAULT_X = 100;
 
 	private boolean jumping = false;
@@ -33,19 +34,15 @@ public class Dinosaur {
     }
     public void jump() {
     	this.jumping = true;
+    	this.v_y = INITIAL_SPEED;
     }
     public void jumpMovement() {
     	if(this.jumping) {
     		// This is bad.
     		GameScreen.dinosaurSprite = new Texture("p1_jump.png");
-			if(time_counter <= 0.6) {
-				if(time_counter <= 0.3) {
-					this.y += 3;
-					System.out.println(time_counter);
-				}
-				else {
-					this.y -= 3;
-				}
+			if(time_counter <= .6) {
+				this.y = init_y + (int) ((INITIAL_SPEED*time_counter)+0.5*GRAVITY*Math.pow(time_counter, 2));
+				this.v_y = INITIAL_SPEED + GRAVITY*time_counter;
 			}
 			else {
 				time_counter = 0;
