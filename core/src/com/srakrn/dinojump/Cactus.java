@@ -47,7 +47,13 @@ public class Cactus {
 	public static ArrayList<Float> getCactiTime() {
 		return cactiTime;
 	}
+	public static float getCactusTime(int i) {
+		return cactiTime.get(i);
+	}
 	public static ArrayList<Integer> getCactiPosition() {
 		return cactiPosition;
+	}
+	public static int getCactusPosition(int i) {
+		return cactiPosition.get(i);
 	}
 }

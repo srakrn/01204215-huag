@@ -16,6 +16,7 @@ public class World {
 			dinosaur.update(delta);
 			Cactus.update(delta);
 			Bird.update(delta);
+			Cloud.update(delta);
 		}
 	}
 }

@@ -47,7 +47,13 @@ public class Bird {
 	public static ArrayList<Float> getBirdsTime() {
 		return birdsTime;
 	}
+	public static float getBirdTime(int i) {
+		return birdsTime.get(i);
+	}
 	public static ArrayList<Integer> getBirdsPosition() {
 		return birdsPosition;
+	}
+	public static float getBirdPosition(int i) {
+		return birdsPosition.get(i);
 	}
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 // SOMETHING'S VERY WRONG ON STATIC/NON-STATIC HERE.
 public class WorldRenderer {
@@ -56,9 +57,9 @@ public class WorldRenderer {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		// Clouds
-		ArrayList<Integer> cloudsPosition = Cloud.getCactiPosition();
+		ArrayList<Vector2> cloudsPosition = Cloud.getCloudsPosition();
 		for(int i=0; i<cloudsPosition.size(); i++) {
-			batch.draw(cloudSprite, cloudsPosition.get(i), World.DEFAULT_Y*2);
+			batch.draw(cloudSprite, (int)cloudsPosition.get(i).x, (int)cloudsPosition.get(i).y);
 		}
 		
 		// Draws background
@@ -73,15 +74,13 @@ public class WorldRenderer {
 		batch.draw(this.dinosaurSprite, x, y);
 		
 		// Cactus
-		ArrayList<Integer> cactiPosition = Cactus.getCactiPosition();
-		for(int i=0; i<cactiPosition.size(); i++) {
-			batch.draw(cactusSprite, cactiPosition.get(i), World.DEFAULT_Y);
+		for(int i=0; i<Cactus.getCactiPosition().size(); i++) {
+			batch.draw(cactusSprite, Cactus.getCactusPosition(i), World.DEFAULT_Y);
 		}
 
 		// Birds
-		ArrayList<Integer> birdsPosition = Bird.getBirdsPosition();
-		for(int i=0; i<birdsPosition.size(); i++) {
-			batch.draw(birdSprite, birdsPosition.get(i), World.DEFAULT_Y+80);
+		for(int i=0; i<Bird.getBirdsPosition().size();  i++) {
+			batch.draw(birdSprite, Bird.getBirdPosition(i), World.DEFAULT_Y+80);
 		}
 
 		if(!dinosaur.isAlive()) {
