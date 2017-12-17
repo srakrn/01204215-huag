@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -21,6 +22,7 @@ public class WorldRenderer {
 	Texture cloudSprite;
 	Texture floorTileTexture;
 	Texture gameOverOverlay;
+	BitmapFont kanitFont;
 
 	WorldRenderer(DinoJumpGame dinoJumpGame, World world){
 		this.dinoJumpGame = dinoJumpGame;
@@ -32,6 +34,7 @@ public class WorldRenderer {
 		this.cloudSprite = new Texture("cloud1.png");
 		this.floorTileTexture = new Texture("floor_tile.png");
 		this.gameOverOverlay = new Texture("gameover.png");
+		this.kanitFont = new BitmapFont(Gdx.files.internal("kanit_regular_32pt.fnt"));
 	}
 	
 	public void updateDinosaurSprite(Dinosaur dinosaur) {
@@ -82,9 +85,13 @@ public class WorldRenderer {
 		for(int i=0; i<Bird.getBirdsPosition().size();  i++) {
 			batch.draw(birdSprite, Bird.getBirdPosition(i), World.DEFAULT_Y+80);
 		}
-
-		if(!dinosaur.isAlive()) {
+		
+		if(dinosaur.isAlive()) {
+			kanitFont.draw(batch, "" + Math.round(Cactus.time*5), 10, 30);
+		}
+		else {
 			batch.draw(gameOverOverlay, 0, 0);
+			kanitFont.draw(batch, "Your score is " + Math.round(Cactus.time*5), 600, 100);
 		}
 		batch.end();
 	}
