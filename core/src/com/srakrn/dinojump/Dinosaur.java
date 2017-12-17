@@ -3,6 +3,7 @@ package com.srakrn.dinojump;
 
 public class Dinosaur {
 	private int x, y, init_y;
+	private float dieSensitivity;
 	private boolean alive;
 	public static float GRAVITY = -2000;
 	public static float INITIAL_SPEED = 600;
@@ -20,6 +21,7 @@ public class Dinosaur {
         this.x = x;
         this.y = y;
         this.init_y = y;
+        this.dieSensitivity = 10;
         this.alive = true;
         this.jumping = false;
         this.ducking = false;
@@ -35,7 +37,8 @@ public class Dinosaur {
     	return jumping;
     }
     public void jump() {
-    	if(!this.jumping) {
+    	// This is bad.
+    	if(!this.jumping && this.isAlive()) {
 			SoundEffect.playJumpSound();
     	}
     	this.jumping = true;
@@ -44,6 +47,10 @@ public class Dinosaur {
     	return this.ducking;
     }
     public void duck() {
+    	// This is bad.
+    	if(!this.ducking && this.isAlive()) {
+			SoundEffect.playDuckSound();
+    	}
     	this.ducking = true;
     }
     public void unDuck() {
@@ -56,13 +63,15 @@ public class Dinosaur {
     public void update(float delta) {
     	if(this.alive) {
 			for(int i=0; i < Bird.getBirdsPosition().size(); i++) {
-				if(Math.abs(Dinosaur.DEFAULT_X - Bird.getBirdsPosition().get(i)) < 50 && !this.isDucking()) {
+				if(Math.abs(Dinosaur.DEFAULT_X - Bird.getBirdsPosition().get(i)) < this.dieSensitivity && !this.isDucking()) {
 					this.alive = false;
+					SoundEffect.playDieSound();
 				}
 			}
 			for(int i=0; i < Cactus.getCactiPosition().size(); i++) {
-				if(Math.abs(Cactus.getCactiPosition().get(i) - Dinosaur.DEFAULT_X) < 50 && !this.isJumping()) {
+				if(Math.abs(Cactus.getCactiPosition().get(i) - Dinosaur.DEFAULT_X) < this.dieSensitivity && !this.isJumping()) {
 					this.alive = false;
+					SoundEffect.playDieSound();
 				}
 			}
 			
@@ -77,6 +86,7 @@ public class Dinosaur {
 				}
 				time_counter += delta;
 			}
+			dieSensitivity += 0.02;
     	}
     }
 }
