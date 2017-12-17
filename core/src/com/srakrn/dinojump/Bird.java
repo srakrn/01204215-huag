@@ -9,15 +9,15 @@ public class Bird {
 		private static final long serialVersionUID = 1L;
 
 	{
-		add((float) 20); 
+		add((float) Preferences.TIME_BEFORE_FIRST_BIRD); 
 	}};
 	private static ArrayList<Float> birdsDelta = new ArrayList<Float>();
 	private static ArrayList<Integer> birdsPosition = new ArrayList<Integer>();
-	public static float speed = 600;
+	public static float speed = Preferences.INITIAL_BIRD_VELOCITY;
 	public static float time = 0;
 	
 	public static void spawn() {
-		birdsTime.add((float) (Math.random()*(5)+5 + birdsTime.get(birdsTime.size()-1)));
+		birdsTime.add((float) (Math.random()*(Preferences.BIRD_TIME_GAP)+Preferences.BIRD_MIN_TIME + birdsTime.get(birdsTime.size()-1)));
 	}
 	public static void spawnWithCustomTime(float time) {
 		birdsTime.add(time);
@@ -42,7 +42,7 @@ public class Bird {
 				birdsPosition.remove(i);
 			}
 		}
-		speed += 0.2;
+		speed += Preferences.BIRD_ACCELERATION;
 	}
 	public static ArrayList<Float> getBirdsTime() {
 		return birdsTime;

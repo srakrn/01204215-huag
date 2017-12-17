@@ -2,17 +2,15 @@ package com.srakrn.dinojump;
 
 import java.util.ArrayList;
 
-public class Cactus {
-	private static ArrayList<Float> cactiTime = new ArrayList<Float>() {/**
+public class Cloud {
+	private static ArrayList<Float> cloudsTime = new ArrayList<Float>() {/**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
 
 	{
-		add((float) Preferences.TIME_BEFORE_FIRST_CACTUS); 
+		add((float) 0); 
 	}};
-	private static ArrayList<Float> cactiDelta = new ArrayList<Float>();
-	private static ArrayList<Integer> cactiPosition = new ArrayList<Integer>();
 	public static float speed = Preferences.INITIAL_CACTUS_VELOCITY;
 	public static float time = 0;
 	

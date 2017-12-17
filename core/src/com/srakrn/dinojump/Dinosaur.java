@@ -52,15 +52,13 @@ public class Dinosaur {
 
     public void update(float delta) {
     	if(this.alive) {
-			for(int i=0; i < Bird.getBirdsPosition().size()/3; i++) {
-				if(Math.abs(Dinosaur.DEFAULT_X - Bird.getBirdsPosition().get(i)) < 30 && !this.isDucking()) {
-					System.out.println("died!");
+			for(int i=0; i < Bird.getBirdsPosition().size(); i++) {
+				if(Math.abs(Dinosaur.DEFAULT_X - Bird.getBirdsPosition().get(i)) < 50 && !this.isDucking()) {
 					this.alive = false;
 				}
 			}
-			for(int i=0; i < Cactus.getCactiPosition().size()/3; i++) {
-				if(Math.abs(Dinosaur.DEFAULT_X - Cactus.getCactiPosition().get(i)) < 30 && !this.isJumping()) {
-					System.out.println("died!");
+			for(int i=0; i < Cactus.getCactiPosition().size(); i++) {
+				if(Math.abs(Cactus.getCactiPosition().get(i) - Dinosaur.DEFAULT_X) < 50 && !this.isJumping()) {
 					this.alive = false;
 				}
 			}

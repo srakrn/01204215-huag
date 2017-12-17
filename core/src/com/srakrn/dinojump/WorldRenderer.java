@@ -17,6 +17,7 @@ public class WorldRenderer {
 	Texture cactusSprite;
 	Bird bird;
 	Texture birdSprite;
+	Texture cloudSprite;
 	Texture floorTileTexture;
 	Texture gameOverOverlay;
 
@@ -27,19 +28,20 @@ public class WorldRenderer {
 		this.dinosaurSprite = new Texture("p1_stand.png");
 		this.cactusSprite = new Texture("cactus.png");
 		this.birdSprite = new Texture("bat.png");
+		this.cloudSprite = new Texture("cloud1.png");
 		this.floorTileTexture = new Texture("floor_tile.png");
 		this.gameOverOverlay = new Texture("gameover.png");
 	}
 	
 	public void updateDinosaurSprite(Dinosaur dinosaur) {
-		if(dinosaur.isJumping()) {
+		if(!dinosaur.isAlive()) {
+			this.dinosaurSprite = new Texture("p1_hurt.png");
+		}
+		else if(dinosaur.isJumping()) {
 			this.dinosaurSprite = new Texture("p1_jump.png");
 		}
 		else if(dinosaur.isDucking()) {
 			this.dinosaurSprite = new Texture("p1_duck.png");
-		}
-		else if(!dinosaur.isAlive()) {
-			this.dinosaurSprite = new Texture("p1_hurt.png");
 		}
 		else {
 			this.dinosaurSprite = new Texture("p1_stand.png");
@@ -52,6 +54,12 @@ public class WorldRenderer {
 		// Clears screen
 		Gdx.gl.glClearColor((float)0.875,(float) 0.9648,(float) 0.9804,(float) 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		// Clouds
+		ArrayList<Integer> cloudsPosition = Cloud.getCactiPosition();
+		for(int i=0; i<cloudsPosition.size(); i++) {
+			batch.draw(cloudSprite, cloudsPosition.get(i), World.DEFAULT_Y*2);
+		}
 		
 		// Draws background
 		batch.draw(floorTileTexture, 0, 0);
@@ -75,6 +83,7 @@ public class WorldRenderer {
 		for(int i=0; i<birdsPosition.size(); i++) {
 			batch.draw(birdSprite, birdsPosition.get(i), World.DEFAULT_Y+80);
 		}
+
 		if(!dinosaur.isAlive()) {
 			batch.draw(gameOverOverlay, 0, 0);
 		}
