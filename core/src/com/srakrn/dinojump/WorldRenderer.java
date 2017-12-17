@@ -91,7 +91,7 @@ public class WorldRenderer {
 		}
 		else {
 			batch.draw(gameOverOverlay, 0, 0);
-			kanitFont.draw(batch, "Your score is " + Math.round(Cactus.time*5), 600, 100);
+			kanitFont.draw(batch, "Your score is " + Math.round(Cactus.time*5) + ".", 450, 120);
 		}
 		batch.end();
 	}
