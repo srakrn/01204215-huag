@@ -9,7 +9,7 @@ public class World {
 	World(DinoJumpGame dinoJumpGame) {
 		// this.dinoJumpGame = dinoJumpGame;
 		dinosaur = new Dinosaur(Dinosaur.DEFAULT_X, World.DEFAULT_Y);
-        SoundEffect.playStartSound();
+        SoundEffect.playBackingTrack();
 	}
 	
 	public void update(float delta) {

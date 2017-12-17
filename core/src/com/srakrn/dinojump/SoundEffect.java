@@ -8,6 +8,7 @@ public class SoundEffect {
 	public static Sound jumpSound = Gdx.audio.newSound(Gdx.files.local("dadi.mp3"));
 	public static Sound duckSound = Gdx.audio.newSound(Gdx.files.local("didoda.mp3"));
 	public static Sound dieSound = Gdx.audio.newSound(Gdx.files.local("dada.mp3"));
+	public static Sound backingTrack = Gdx.audio.newSound(Gdx.files.local("oogoe.mp3"));
 	public static boolean isPlaying = false;
 
 	public static void playStartSound() {
@@ -21,5 +22,9 @@ public class SoundEffect {
 	}
 	public static void playDieSound() {
 		dieSound.play(1.0f);
+	}
+	public static void playBackingTrack() {
+		backingTrack.setLooping(0, true);
+		backingTrack.play(1.0f);
 	}
 }
