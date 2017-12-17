@@ -13,7 +13,7 @@ public class Cactus {
 	}};
 	private static ArrayList<Float> cactiDelta = new ArrayList<Float>();
 	private static ArrayList<Integer> cactiPosition = new ArrayList<Integer>();
-	public static float speed = 400;
+	public static float speed = 500;
 	public static float time = 0;
 	
 	public static void spawn() {
@@ -42,7 +42,7 @@ public class Cactus {
 				cactiPosition.remove(i);
 			}
 		}
-		speed += 0.2;
+		speed += 0.1;
 	}
 	public static ArrayList<Float> getCactiTime() {
 		return cactiTime;
