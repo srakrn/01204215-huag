@@ -35,6 +35,9 @@ public class Dinosaur {
     	return jumping;
     }
     public void jump() {
+    	if(!this.jumping) {
+			SoundEffect.playJumpSound();
+    	}
     	this.jumping = true;
     }
     public boolean isDucking() {
