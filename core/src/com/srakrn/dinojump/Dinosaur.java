@@ -59,19 +59,22 @@ public class Dinosaur {
     public boolean isAlive() {
     	return this.alive;
     }
+    public void die() {
+    	this.alive = false;
+    	SoundEffect.stopBackingTrack();
+    	SoundEffect.playDieTrack();
+    }
 
     public void update(float delta) {
     	if(this.alive) {
 			for(int i=0; i < Bird.getBirdsPosition().size(); i++) {
 				if(Math.abs(Dinosaur.DEFAULT_X - Bird.getBirdsPosition().get(i)) < this.dieSensitivity && !this.isDucking()) {
-					this.alive = false;
-					SoundEffect.playDieSound();
+					this.die();
 				}
 			}
 			for(int i=0; i < Cactus.getCactiPosition().size(); i++) {
 				if(Math.abs(Cactus.getCactiPosition().get(i) - Dinosaur.DEFAULT_X) < this.dieSensitivity && !this.isJumping()) {
-					this.alive = false;
-					SoundEffect.playDieSound();
+					this.die();
 				}
 			}
 			
