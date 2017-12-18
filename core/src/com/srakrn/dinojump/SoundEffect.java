@@ -10,7 +10,10 @@ public class SoundEffect {
 	public static Sound dieSound = Gdx.audio.newSound(Gdx.files.local("dada.mp3"));
 	public static Sound backingTrack = Gdx.audio.newSound(Gdx.files.local("oogoe.mp3"));
 	public static Sound dieTrack = Gdx.audio.newSound(Gdx.files.local("365.mp3"));
-	public static boolean isPlaying = false;
+	
+	public SoundEffect() {
+		backingTrack.setLooping(0, true);
+	}
 
 	public static void playStartSound() {
 		startSound.play(1.0f);
@@ -26,7 +29,7 @@ public class SoundEffect {
 	}
 	public static void playBackingTrack() {
 		backingTrack.setLooping(0, true);
-		backingTrack.play(1.0f);
+		backingTrack.loop(1.0f);
 	}
 	public static void stopBackingTrack() {
 		backingTrack.stop();
